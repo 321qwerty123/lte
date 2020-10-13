@@ -18,4 +18,7 @@ public interface IUserService {
      * @return
      */
     Page<UserEntity> findByCondition(UserEntity detailParam, Pageable pageable);
+
+
+
 }
