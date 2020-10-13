@@ -25,7 +25,7 @@ class LteApplicationTests {
     private IUserService iUserService;
 
     @Test
-     void before() {
+     void before() throws InterruptedException {
         UserEntity userDO = new UserEntity();
         userDO.setId(1L);
         userDO.setName("风清扬");
@@ -65,7 +65,11 @@ class LteApplicationTests {
         UserEntity u1 = userRepo.findByAccount("wentian");
         System.out.println(u1);
 
+        Thread.sleep(3000);
+
         UserEntity u2 = userRepo.findByAccountAndPassword("fengqy","123456");
+        u2.setPassword("147258");
+        userRepo.save(u2);
         System.out.println(u2);
 
 
