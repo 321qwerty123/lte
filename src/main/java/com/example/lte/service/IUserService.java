@@ -1,6 +1,7 @@
 package com.example.lte.service;
 
 import com.example.lte.entity.UserEntity;
+import com.example.lte.po.LoginPO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,5 +21,5 @@ public interface IUserService {
     Page<UserEntity> findByCondition(UserEntity detailParam, Pageable pageable);
 
 
-
+    LoginPO doLogin(String account ,String pwd);
 }

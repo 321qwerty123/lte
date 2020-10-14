@@ -1,7 +1,11 @@
 package com.example.lte.service;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.example.lte.entity.UserEntity;
+import com.example.lte.po.LoginPO;
 import com.example.lte.repo.UserRepo;
+import com.example.lte.restful.APIException;
+import com.example.lte.restful.ResultCodeEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -62,5 +66,28 @@ public class UserServiceImpl implements IUserService{
 
             return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
         }, pageable);
+    }
+
+    @Override
+    public LoginPO doLogin(String account, String pwd) {
+
+        if (userRepo.findByAccount(account) != null){
+            UserEntity u1 = userRepo.findByAccountAndPassword(account,pwd);
+            if (u1 == null){
+                throw new APIException(ResultCodeEnum.ACCOUNT_PASS_FAILED);
+            }else {
+                StpUtil.setLoginId(u1.getAccount());
+                String tokenValue = StpUtil.getTokenInfo().get("tokenValue");
+                return LoginPO.builder()
+                        .account(account)
+                        .token(tokenValue)
+                        .userId(u1.getId())
+                        .userName(u1.getName())
+                        .build();
+
+            }
+        }else {
+            throw new APIException(ResultCodeEnum.ACCOUNT_NOT_EXIST);
+        }
     }
 }

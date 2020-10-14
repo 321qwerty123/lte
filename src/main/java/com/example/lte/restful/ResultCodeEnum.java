@@ -10,7 +10,7 @@ public enum ResultCodeEnum {
     TOKEN_USER_ALREADY_SIGN(9775, "token用户已登录,请退出重登后再请求本接口"),
     FAILED(9500, "响应失败"),
     BUSY(9600, "系统繁忙"),
-    ACCOUNT_PASS_FAILED(9301, "账号或密码错误"),
+    ACCOUNT_PASS_FAILED(9301, "密码错误"),
     ACCOUNT_NOT_EXIST(9302, "用户名不存在"),
     ACCOUNT_DISABLED(9303, "用户没有权限/已禁用"),
     NOT_LOGIN(9403,"未登录"),
