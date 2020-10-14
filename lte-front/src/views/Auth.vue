@@ -23,7 +23,9 @@
 </template>
 
 <script>
-export default {
+  import {loginReq} from "../api/backend-req/login";
+
+  export default {
   name: "Auth",
   data() {
     return {
@@ -37,6 +39,12 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+          let reqParam = values;
+          loginReq(reqParam).then(res=>{
+
+          }).catch(err=>{
+
+          })
         }
       });
     },

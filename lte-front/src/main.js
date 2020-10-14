@@ -5,6 +5,9 @@ import router from './router'
 import Antd from "ant-design-vue";
 import 'ant-design-vue/dist/antd.css';
 Vue.use(Antd)
+import VueUUID from 'vue-uuid';
+Vue.use(VueUUID);
+
 
 Vue.config.productionTip = false
 
