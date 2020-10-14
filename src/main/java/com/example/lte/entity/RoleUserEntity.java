@@ -1,5 +1,9 @@
 package com.example.lte.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
@@ -9,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @IdClass(RoleUserId.class)
 @Table(name = "role_user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoleUserEntity {
     @Id
     private Long roleId;

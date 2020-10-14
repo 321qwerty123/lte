@@ -20,6 +20,8 @@ import java.util.List;
 @Repository
 public interface UserRepo extends JpaSpecificationExecutor<UserEntity>, JpaRepository<UserEntity, Long> {
 
+    List<UserEntity> findByNameIsLike(String name);
+
     UserEntity findByAccount(String account);
 
     UserEntity findByAccountAndPassword(String account, String password);

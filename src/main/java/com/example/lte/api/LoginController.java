@@ -1,5 +1,6 @@
 package com.example.lte.api;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.example.lte.po.LoginPO;
 import com.example.lte.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,14 @@ public class LoginController {
        return iUserService.doLogin(account, pwd);
     }
 
-
+    @GetMapping("/isLogin")
+    String isLogin(){
+        if (StpUtil.isLogin()){
+            return "已登录";
+        }else {
+            return "未登录";
+        }
+    }
 
 
 

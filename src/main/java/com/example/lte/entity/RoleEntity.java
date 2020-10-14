@@ -1,5 +1,10 @@
 package com.example.lte.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +12,11 @@ import javax.persistence.*;
  * @date 2020/10/13 - 14:11
  */
 @Entity
-@Table(name = "role")
+@Table(name = "role",uniqueConstraints=@UniqueConstraint(columnNames={"name"}))
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoleEntity {
     /**
      * 角色id

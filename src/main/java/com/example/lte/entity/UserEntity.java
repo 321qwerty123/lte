@@ -13,6 +13,8 @@ import java.sql.Timestamp;
  * <p>
  * https://blog.csdn.net/kai46385076/article/details/79930846?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-1-79930846.nonecase&utm_term=jpa%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%A1%A8%E6%B3%A8%E9%87%8A&spm=1000.2123.3001.4430
  * JPA 通过注解自动生成表，添加 字段名、类型、注释
+ * https://blog.csdn.net/u011442726/article/details/104015623
+ * JPA添加唯一索引约束,添加普通索引
  *
  * @author lzh
  * @Table - 映射表名
@@ -26,7 +28,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "user"
+        ,indexes = {@Index(columnList = "name")}
+        ,uniqueConstraints=@UniqueConstraint(columnNames={"account"}))
 @org.hibernate.annotations.Table(appliesTo = "user", comment = "表注释--用户表")
 public class UserEntity {
 

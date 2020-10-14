@@ -1,6 +1,10 @@
 package com.example.lte;
 
+import com.example.lte.entity.RoleEntity;
+import com.example.lte.entity.RoleUserEntity;
 import com.example.lte.entity.UserEntity;
+import com.example.lte.repo.RoleRepo;
+import com.example.lte.repo.RoleUserRelRepo;
 import com.example.lte.repo.UserRepo;
 import com.example.lte.service.IUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,7 +26,33 @@ class LteApplicationTests {
     @Autowired
     private UserRepo userRepo;
     @Autowired
+    private RoleRepo roleRepo;
+    @Autowired
+    private RoleUserRelRepo roleUserRelRepo;
+    @Autowired
     private IUserService iUserService;
+
+    @Test
+    void role1(){
+        roleRepo.save(RoleEntity.builder()
+                .name("dev").note("开发").build());
+
+    }
+
+    @Test
+    void tuserrole1(){
+      List<UserEntity> res1 =  userRepo.findByNameIsLike("风%");
+      List<UserEntity> res2 =  userRepo.findByNameIsLike("%风");
+      List<UserEntity> res3 =  userRepo.findByNameIsLike("%风%");
+        System.out.println(res1+"\n");
+        System.out.println(res2+"\n");
+        System.out.println(res3);
+
+        roleUserRelRepo.save(RoleUserEntity.builder()
+                .roleId(roleRepo.findByName("dev").getId())
+                .userId(userRepo.findByAccount("lhc").getId())
+                .build());
+    }
 
     @Test
      void before() throws InterruptedException {
