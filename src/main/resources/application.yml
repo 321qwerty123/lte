@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   # sa-token配置
   sa-token:
