@@ -1,6 +1,8 @@
 <template>
 
   <div class="content">
+    <a-card>
+
     <a-form
             id="components-form-demo-normal-login"
             :form="form"
@@ -54,6 +56,8 @@
         </a>
       </a-form-item>
     </a-form>
+    </a-card>
+
   </div>
 
 </template>
@@ -92,20 +96,11 @@
 </script>
 
 <style scoped>
-html,body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 
 
 .content {
   width: 400px;
   height: 300px;
-  /*background: orange;*/
-  border: beige 1px;
   margin: 0 auto;
   top: 190px;
   position: relative;
