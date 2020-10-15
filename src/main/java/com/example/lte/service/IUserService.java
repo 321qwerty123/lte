@@ -2,6 +2,7 @@ package com.example.lte.service;
 
 import com.example.lte.entity.UserEntity;
 import com.example.lte.po.LoginPO;
+import com.example.lte.po.PermPO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +23,7 @@ public interface IUserService {
 
 
     LoginPO doLogin(String account ,String pwd);
+
+
+    PermPO getPremByUserId(Long userId);
 }

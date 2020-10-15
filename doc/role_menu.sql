@@ -1,0 +1,1 @@
+INSERT INTO lte.role_menu (menu_id, role_id) VALUES (1, 1);

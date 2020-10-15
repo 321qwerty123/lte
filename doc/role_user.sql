@@ -1,0 +1,1 @@
+INSERT INTO lte.role_user (role_id, user_id) VALUES (1, 5);

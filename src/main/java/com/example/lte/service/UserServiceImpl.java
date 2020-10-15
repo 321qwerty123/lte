@@ -1,8 +1,15 @@
 package com.example.lte.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.example.lte.entity.ButtonEntity;
+import com.example.lte.entity.MenuEntity;
+import com.example.lte.entity.RoleUserEntity;
 import com.example.lte.entity.UserEntity;
 import com.example.lte.po.LoginPO;
+import com.example.lte.po.PermPO;
+import com.example.lte.repo.ButtonRepo;
+import com.example.lte.repo.MenuRepo;
+import com.example.lte.repo.RoleUserRelRepo;
 import com.example.lte.repo.UserRepo;
 import com.example.lte.restful.APIException;
 import com.example.lte.restful.ResultCodeEnum;
@@ -14,7 +21,10 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -26,6 +36,12 @@ public class UserServiceImpl implements IUserService{
 
     @Resource
     private UserRepo userRepo;
+    @Resource
+    private RoleUserRelRepo roleUserRelRepo;
+    @Resource
+    private MenuRepo menuRepo;
+    @Resource
+    private ButtonRepo buttonRepo;
 
     /**
      * JpaSpecificationExecutor 多条件动态查询 类似于 mybatis xml里的if标签
@@ -89,5 +105,29 @@ public class UserServiceImpl implements IUserService{
         }else {
             throw new APIException(ResultCodeEnum.ACCOUNT_NOT_EXIST);
         }
+    }
+
+    @Override
+    public PermPO getPremByUserId(Long userId) {
+
+        List<RoleUserEntity> list1 = roleUserRelRepo.findByUserId(userId);
+        List<Long> roleIds = list1.stream().map(RoleUserEntity::getRoleId).distinct().collect(Collectors.toList());
+
+        List<MenuEntity> resultM = new ArrayList<>();
+        List<ButtonEntity> resultB = new ArrayList<>();
+        roleIds.forEach(p->{
+            resultM.addAll(menuRepo.findMenuEntitiesByRoleId(p));
+            resultB.addAll( buttonRepo.findButtonEntitiesByRoleId(p));
+        });
+
+        Set<MenuEntity> setMenu = new HashSet<>(resultM);
+        Set<ButtonEntity> setBtn = new HashSet<>(resultB);
+
+        return PermPO.builder()
+                .buttonEntitySet(setBtn)
+                .menuEntitySet(setMenu)
+                .roleIds(roleIds)
+                .userId(userId)
+                .build();
     }
 }

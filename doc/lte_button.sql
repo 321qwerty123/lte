@@ -1,0 +1,1 @@
+INSERT INTO lte.lte_button (button_id, button_name, note) VALUES (1, 'editPersonal', '编辑');

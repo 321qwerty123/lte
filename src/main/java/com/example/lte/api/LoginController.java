@@ -2,6 +2,7 @@ package com.example.lte.api;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.example.lte.po.LoginPO;
+import com.example.lte.po.PermPO;
 import com.example.lte.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,61 @@ public class LoginController {
         }else {
             return "未登录";
         }
+    }
+
+
+    /**
+     * {
+     *     "userId": 5,
+     *     "roleIds": [   //1个用户可对应多角色
+     *         1,
+     *         4
+     *     ],
+     *     "menuEntitySet": [    //合并多角色的菜单
+     *         {
+     *             "menuId": 2,
+     *             "note": "用户管理",
+     *             "routerName": "AccountManage",
+     *             "routerPath": "/accountManage",
+     *             "routerComponent": "AccountManage"
+     *         },
+     *         {
+     *             "menuId": 1,
+     *             "note": "个人中心",
+     *             "routerName": "Personal",
+     *             "routerPath": "/personal",
+     *             "routerComponent": "Personal"
+     *         }
+     *     ],
+     *     "buttonEntitySet": [   //合并多角色的按钮
+     *         {
+     *             "buttonId": 3,
+     *             "buttonName": "addAccount",
+     *             "note": "新增"
+     *         },
+     *         {
+     *             "buttonId": 4,
+     *             "buttonName": "delAccount",
+     *             "note": "删除"
+     *         },
+     *         {
+     *             "buttonId": 2,
+     *             "buttonName": "editAccount",
+     *             "note": "编辑"
+     *         },
+     *         {
+     *             "buttonId": 1,
+     *             "buttonName": "editPersonal",
+     *             "note": "编辑"
+     *         }
+     *     ]
+     * }
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getPremByUserId")
+    PermPO getPremByUserId(Long userId){
+       return iUserService.getPremByUserId(userId);
     }
 
 
