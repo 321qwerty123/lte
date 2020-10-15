@@ -21,4 +21,7 @@ public class ButtonEntity {
 
     @Column(length = 50)
     private String buttonName;
+
+    @Column(length = 64)
+    private String note;
 }

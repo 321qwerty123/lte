@@ -1,0 +1,1 @@
+INSERT INTO lte.role (id, name, note) VALUES (1, 'dev', '开发');
