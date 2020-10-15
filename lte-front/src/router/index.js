@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Personal from "@/views/Personal";
+import Layout from "@/views/Layout";
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
     path: '/personal',
     name: 'Personal',
     component: Personal
+  },
+  {
+    path: '/layout',
+    name: 'Layout',
+    component: Layout
   }
 ]
 
