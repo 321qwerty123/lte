@@ -83,12 +83,18 @@
           console.log('Received values of form: ', values);
           let reqParam = values;
           loginReq(reqParam).then(res=>{
-            console.log('login res ---',res)
-            sessionStorage.setItem('loginInfo',JSON.stringify(res.data.data));
-            // this.$router.push({path:'/defaultHome',query:{auth:'123'}})
-            this.$router.push({path:'/defaultHome',query:res.data.data})
+            if (res.data.code === 0){
+              console.log('login res ---',res)
+              sessionStorage.setItem('loginInfo',JSON.stringify(res.data.data));
+              this.$message.success('登陆成功!');
+              this.$router.push({path:'/defaultHome'})
+              // this.$router.push({path:'/defaultHome',query:res.data.data})
+            }else {
+              this.$message.error('登陆失败!');
+            }
 
           }).catch(err=>{
+            this.$message.error('登陆失败!');
 
           })
         }

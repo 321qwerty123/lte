@@ -1,13 +1,12 @@
 <template>
-<div>
-  <a-empty />
-<!--  <p>This is DefaultHome</p>-->
-</div>
+  <div>
+  404
+  </div>
 </template>
 
 <script>
 export default {
-  name: "DefaultHome"
+  name: "Error"
 }
 </script>
 

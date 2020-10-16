@@ -6,9 +6,9 @@
       </div>
       <a-menu theme="dark" :default-selected-keys="['1']" mode="inline">
         <!--    1层菜单    -->
-        <a-menu-item key="1">
-          <a-icon type="pie-chart"/>
-          <span>Option 1</span>
+        <a-menu-item  @click="test1" key="defaultHome">
+          <a-icon type="home" />
+          <span>Home</span>
         </a-menu-item>
 
 
@@ -77,11 +77,15 @@ export default {
   },
   data() {
     return {
-      timer: undefined,
       collapsed: false,
     };
   },
   methods: {
+    test1(v1){
+      console.log(v1)
+
+
+    },
     //退出按钮事件
     logoutSys() {
       this.$router.push({path: '/'});

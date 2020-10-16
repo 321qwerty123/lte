@@ -5,6 +5,7 @@ import Personal from "@/views/Personal";
 import SysLayout from "@/views/SysLayout";
 import TimeOut from "@/views/TimeOut";
 import DefaultHome from "@/views/DefaultHome";
+import Error from "@/views/Error";
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,6 +54,11 @@ const routes = [
       },
 
     ]
+  },
+  {
+    path: '*',
+    name: 'error',
+    component:Error
   }
 ]
 
