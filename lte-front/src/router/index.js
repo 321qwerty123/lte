@@ -2,37 +2,57 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Personal from "@/views/Personal";
-import Layout from "@/views/Layout";
+import SysLayout from "@/views/SysLayout";
+import TimeOut from "@/views/TimeOut";
+import DefaultHome from "@/views/DefaultHome";
 Vue.use(VueRouter)
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
+  // {
+  //   path: '/timeout',
+  //   name: 'TimeOut',
+  //   component: TimeOut
+  // },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // },
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/auth',
     name: 'Auth',
     component: () => import(/* webpackChunkName: "about" */ '../views/Auth.vue')
   },
+  // {
+  //   path: '/personal',
+  //   name: 'Personal',
+  //   component: Personal
+  // },
   {
-    path: '/personal',
-    name: 'Personal',
-    component: Personal
-  },
-  {
-    path: '/layout',
-    name: 'Layout',
-    component: Layout
+    path: '/defaultHome',
+    name: 'SysLayout',
+    component: SysLayout,
+    children:[
+      {
+        path:'/',
+        name:'defaultHome',
+        component:DefaultHome
+      },
+      {
+        path: '/personal',
+        name: 'Personal',
+        component: Personal
+      },
+
+    ]
   }
 ]
 

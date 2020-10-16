@@ -83,6 +83,10 @@
           console.log('Received values of form: ', values);
           let reqParam = values;
           loginReq(reqParam).then(res=>{
+            console.log('login res ---',res)
+            sessionStorage.setItem('loginInfo',JSON.stringify(res.data.data));
+            // this.$router.push({path:'/defaultHome',query:{auth:'123'}})
+            this.$router.push({path:'/defaultHome',query:res.data.data})
 
           }).catch(err=>{
 
