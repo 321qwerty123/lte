@@ -6,6 +6,7 @@ import SysLayout from "@/views/SysLayout";
 import TimeOut from "@/views/TimeOut";
 import DefaultHome from "@/views/DefaultHome";
 import Error from "@/views/Error";
+import UserManage from "@/views/UserManage";
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,14 +53,19 @@ const routes = [
         name: 'Personal',
         component: Personal
       },
+      {
+        path: '/userManage',
+        name: 'UserManage',
+        component: UserManage
+      },
 
     ]
   },
-  {
-    path: '*',
-    name: 'error',
-    component:Error
-  }
+  // {
+  //   path: '*',
+  //   name: 'error',
+  //   component:Error
+  // }
 ]
 
 const router = new VueRouter({
@@ -71,7 +77,27 @@ router.beforeEach((to, from, next) => {
   // console.log(to);
   // console.log('当前导航正要离开的路由')
   // console.log(from);
-  next();
+
+  if (to.path === '/' ){
+    //任何情况均可访问login页面
+    next();
+  }else {
+    let loginInfoStr = sessionStorage.getItem('loginInfo');
+    if (loginInfoStr !== undefined && loginInfoStr !== null){
+      let token = JSON.parse(loginInfoStr).token;
+      if (token !== undefined && token !== null){
+        //有token表示已登录
+        next();
+      }else {
+        //回去login页
+        next({ path: '/' });
+      }
+    }else {
+      //回去login页
+      next({ path: '/' });
+    }
+  }
+
 
 
   //next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。

@@ -4,24 +4,28 @@
       <div class="logo">
         <p style="text-align: center;color: white">TEST</p>
       </div>
-      <a-menu theme="dark" :default-selected-keys="['1']" mode="inline">
+      <a-menu theme="dark" :default-selected-keys="['defaultHome']" mode="inline">
         <!--    1层菜单    -->
         <a-menu-item  @click="test1" key="defaultHome">
           <a-icon type="home" />
           <span>Home</span>
+          <router-link to="/defaultHome"></router-link>
         </a-menu-item>
 
 
         <!-- 2层菜单-->
         <a-sub-menu key="sub1">
-          <span slot="title"><a-icon type="user"/><span>User</span></span>
-          <a-menu-item key="3">
-            Tom
+          <span slot="title"><a-icon type="user"/><span>系统管理</span></span>
+          <a-menu-item  @click="test1" key="userManage">
+            <span>用户管理</span>
+            <router-link to="/userManage"></router-link>
           </a-menu-item>
-          <a-menu-item key="4">
+
+          <a-menu-item  @click="test1" key="4">
             Bill
           </a-menu-item>
-          <a-menu-item key="5">
+
+          <a-menu-item  @click="test1" key="5">
             Alex
           </a-menu-item>
         </a-sub-menu>
@@ -54,10 +58,12 @@
         <a-breadcrumb style="margin: 16px 0">
 <!--          <a-breadcrumb-item>User</a-breadcrumb-item>-->
           <a-breadcrumb-item>{{ this.$route.name }}</a-breadcrumb-item>
+<!--          <a-breadcrumb-item v-for=" item in this.$route.matched" :key="item.path"> {{item.path.substring(1,item.path.length)}}</a-breadcrumb-item>-->
+
         </a-breadcrumb>
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
 
-          <router-view/>
+          <router-view></router-view>
 
         </div>
       </a-layout-content>
@@ -82,6 +88,7 @@ export default {
   },
   methods: {
     test1(v1){
+      console.log('------')
       console.log(v1)
 
 
@@ -94,7 +101,7 @@ export default {
     //显示登陆账户中文名
     getLoginAccountName(){
      let loginInfoStr = sessionStorage.getItem('loginInfo');
-     if (loginInfoStr !== undefined){
+     if (loginInfoStr !== undefined && loginInfoStr !== null){
        return JSON.parse(loginInfoStr).userName;
      }else {
        return "Personal";
