@@ -37,10 +37,12 @@
             <a-icon type="user"/>
             {{getLoginAccountName()}}
           </a-button>
-          <a-button style="margin-right: 5px">
+
+          <a-button @click="screenfullBtn()" style="margin-right: 5px">
             <a-icon type="fullscreen"/>
             全屏
           </a-button>
+
           <a-button @click="logoutSys()" type="primary" style="margin-right: 5px">
             <a-icon type="logout"/>
             退出
@@ -67,7 +69,7 @@
 </template>
 <script>
 import TimeOut from "@/views/TimeOut";
-
+import screenfull from 'screenfull'
 export default {
   name: 'SysLayout',
   components: {
@@ -75,16 +77,17 @@ export default {
   },
   data() {
     return {
-
       timer: undefined,
       collapsed: false,
     };
   },
   methods: {
+    //退出按钮事件
     logoutSys() {
       this.$router.push({path: '/'});
       sessionStorage.clear();
     },
+    //显示登陆账户中文名
     getLoginAccountName(){
      let loginInfoStr = sessionStorage.getItem('loginInfo');
      if (loginInfoStr !== undefined){
@@ -92,6 +95,20 @@ export default {
      }else {
        return "Personal";
      }
+    },
+    //全屏按钮事件
+    screenfullBtn(){
+      if (!screenfull.isEnabled) {
+        this.$message.warning('浏览器不支持全屏!');
+        return false;
+      }
+      screenfull.toggle();
+      console.log(screenfull.isFullscreen)
+      if (screenfull.isFullscreen){
+        this.$message.success('页面已退出全屏!');
+      }else {
+        this.$message.success('页面已全屏显示!');
+      }
     }
 
   },

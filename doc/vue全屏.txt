@@ -1,0 +1,40 @@
+https://www.cnblogs.com/wjw-/p/11550617.html
+
+npm install --save screenfull
+
+
+在需要的页面引用
+import screenfull from 'screenfull'
+
+核心方法
+screenfull.toggle()
+
+具体代码
+
+<template>
+  <span @click='clickFullscreen'>全屏</span>
+</template>
+
+<script>
+  import screenfull from 'screenfull'
+  export default{
+    name: 'screenfull',
+    data(){
+      return {
+        isFullscreen: false
+      }
+    },
+    methods:{
+      clickFullscreen(){
+        if (!screenfull.isEnabled) {
+          this.$message({
+            message: 'you browser can not work',
+            type: 'warning'
+          })
+          return false
+        }
+        screenfull.toggle()
+      }
+    }
+  }
+</script>
